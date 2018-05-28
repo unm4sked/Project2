@@ -1,0 +1,26 @@
+﻿@model Project2.Models.UserModel
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+@if (@ViewData["Register"] == "ok")
+{
+<div class="alert alert-success space text-center">
+    @ViewData["Message"]
+</div>
+}
+<div class="jumbotron space">
+    <center>
+            <h1>Hello to Project2 WebApp!</h1> 
+    </center>
+</div>
+
+<div class="space">
+    <h2>
+        <center>
+            <a asp-controller="Home" asp-action="CreateRegex">Create</a> an account in two easy steps!
+        </center>
+        
+    </h2>
+    
+</div>

@@ -1,0 +1,23 @@
+@model Project2.Models.UserModel
+
+<h1>Login</h1>
+@if (@ViewData["Message"] != null)
+{
+<div class="alert alert-danger space text-center">
+    @ViewData["Message"]
+</div>
+}
+<form asp-action="Logged" asp-controller="Home" method="POST" class="form-wrapper">
+    
+    <div class="input-group">
+        <label>Login:</label>
+        <input id="Login" asp-for="Login" type="text" class="input" size="35">
+    </div>
+    <div class="input-group">
+        <label>Password:</label>
+        <input id="Password" asp-for="Password" type="Password" class="input" size="35">
+    </div>    
+    <div class="input-group">
+        <button class="submit" >Sign Up</button>
+    </div>
+</form>

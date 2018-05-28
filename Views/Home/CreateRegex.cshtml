@@ -1,0 +1,65 @@
+@model Project2.Models.UserModel
+<script type="text/javascript">
+    function disableMyText(p1,p2){  
+          if(document.getElementById(p1).checked == true){  
+              document.getElementById(p2).disabled = false;  
+          }else{
+            document.getElementById(p2).disabled = true;
+          }  
+     };
+</script>
+<h1>Step 1: Create Regex</h1>
+
+@if (@ViewData["Message"] != null)
+{
+<div class="alert alert-danger space text-center">
+    @ViewData["Message"]
+</div>
+}
+
+<form asp-action="Regist" asp-controller="Home" method="POST" class="form-wrapper">
+        <div class="input-group">
+            <label>Description:</label>
+            <textarea id="Description" asp-for="Description" type="text" class="input"></textarea>
+            
+        </div>
+        <div class="input-group">
+            <label>Min length:</label>
+            <input id="chMinLength" asp-for="chMinLength" type="checkbox"  onclick='disableMyText("chMinLength","MinLength")'>
+            <input id="MinLength" asp-for="MinLength" type="number" class="input" value="9" min="9" disabled >
+        </div>
+        <div class="input-group">
+            <label>Max legth:</label>
+            <input id="chMaxLength" asp-for="chMaxLength" type="checkbox"  onclick='disableMyText("chMaxLength","MaxLength")'>
+            <input id="MaxLength" asp-for="MaxLength" type="number" class="input" value=10 max="30" min="10" disabled>
+        </div>
+        <div class="input-group">
+            <label>Min Uppercase:</label>
+            <input id="chUppercase" asp-for="chUppercase" type="checkbox"  onclick='disableMyText("chUppercase","MinUppercase")'>
+            <input id="MinUppercase" asp-for="MinUppercase" type="number" class="input" min="1" value="1" disabled>
+        </div>
+        <div class="input-group">
+            <label>Min Lowercase:</label>
+            <input id="chLowercase" asp-for="chLowercase" type="checkbox"  onclick='disableMyText("chLowercase","MinLowercase")'>
+            <input id="MinLowercase" asp-for="MinLowercase" type="number" class="input" min="1" max="27" value="1" disabled>
+        </div>
+        <div class="input-group">
+            <label>Min SpecialSigns:</label>
+            <input id="chSpecialSigns" asp-for="chSpecialSigns" type="checkbox"  onclick='disableMyText("chSpecialSigns","MinSpecialSigns")'>
+            <input id="MinSpecialSigns" asp-for="MinSpecialSigns" type="number" class="input" min="1" max="27" value="1" disabled>
+        </div>
+        <div class="input-group">
+            <label>Min Digits:</label>
+            <input id="chDigits" asp-for="chDigits" type="checkbox"  onclick='disableMyText("chDigits","MinDigits")'>
+            <input id="MinDigits" asp-for="MinDigits" type="number" class="input" min="1" max="27" value="1" disabled>
+        </div>
+        
+        <!-- <div class="input-group">
+            <label>Password:</label>
+            <input id="Password" asp-for="Password" type="text" class="input">
+        </div> -->
+
+        <div class="input-group">
+            <button class="btn btn-success">Go to Step2</button>
+        </div>
+    </form>

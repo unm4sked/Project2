@@ -1,0 +1,11 @@
+/home/ukasz/dotnet/Project2/bin/Debug/netcoreapp2.0/Project2.deps.json
+/home/ukasz/dotnet/Project2/bin/Debug/netcoreapp2.0/Project2.runtimeconfig.json
+/home/ukasz/dotnet/Project2/bin/Debug/netcoreapp2.0/Project2.runtimeconfig.dev.json
+/home/ukasz/dotnet/Project2/bin/Debug/netcoreapp2.0/Project2.dll
+/home/ukasz/dotnet/Project2/bin/Debug/netcoreapp2.0/Project2.pdb
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.csprojAssemblyReference.cache
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.csproj.CoreCompileInputs.cache
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.AssemblyInfoInputs.cache
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.AssemblyInfo.cs
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.dll
+/home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.pdb
