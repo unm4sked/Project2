@@ -6,7 +6,8 @@
           }else{
             document.getElementById(p2).disabled = true;
           }  
-     };
+    };
+
 </script>
 <h1>Step 1: Create Regex</h1>
 
@@ -35,7 +36,7 @@
         </div>
         <div class="input-group">
             <label>Min Uppercase:</label>
-            <input id="chUppercase" asp-for="chUppercase" type="checkbox"  onclick='disableMyText("chUppercase","MinUppercase")'>
+            <input id="chUppercase" asp-for="chUppercase"  type="checkbox"  onclick='disableMyText("chUppercase","MinUppercase")'>
             <input id="MinUppercase" asp-for="MinUppercase" type="number" class="input" min="1" value="1" disabled>
         </div>
         <div class="input-group">
@@ -60,6 +61,8 @@
         </div> -->
 
         <div class="input-group">
-            <button class="btn btn-success">Go to Step2</button>
+            <button type="reset" class="btn btn-danger">Reset</button>
+            <button class="btn btn-success">Next</button>
+
         </div>
     </form>

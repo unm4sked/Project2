@@ -2,45 +2,54 @@
 
 <h1>Step2: Register</h1>
 <div>
+    @if (@ViewData["Message"] != null)
+    {
+        <div class="alert alert-danger space text-center">
+            @ViewData["Message"]
+        </div>
+    }
+    <!-- <strong>Description:</strong> @Model.Description <br>
+    <strong>Min legth checkbox:</strong> @Model.chMinLength  |    <strong>Minlegth:</strong> @Model.MinLength <br>
+    <strong>Max legth checkbox:</strong> @Model.chMaxLength | <strong>MaxLength:</strong> @Model.MaxLength <br>
+    <strong>Min Uppercase checkbox:</strong> @Model.chUppercase | <strong>Min Uppercase:</strong> @Model.MinUppercase <br>
+    <strong>Min Lowercase checkbox:</strong> @Model.chLowercase | <strong>Min Lowercase:</strong> @Model.MinLowercase <br>
+    <strong>Min SpecialSigns checkbox:</strong> @Model.chSpecialSigns | <strong>Min SpecialSigns:</strong> @Model.MinSpecialSigns <br>
+    <strong>Min Digits checkbox:</strong> @Model.chDigits | <strong>Min Digits:</strong> @Model.MinDigits <br>
 
-<!-- <strong>Description:</strong> @Model.Description <br>
-<strong>Min legth checkbox:</strong> @Model.chMinLength  |    <strong>Minlegth:</strong> @Model.MinLength <br>
-<strong>Max legth checkbox:</strong> @Model.chMaxLength | <strong>MaxLength:</strong> @Model.MaxLength <br>
-<strong>Min Uppercase checkbox:</strong> @Model.chUppercase | <strong>Min Uppercase:</strong> @Model.MinUppercase <br>
-<strong>Min Lowercase checkbox:</strong> @Model.chLowercase | <strong>Min Lowercase:</strong> @Model.MinLowercase <br>
-<strong>Min SpecialSigns checkbox:</strong> @Model.chSpecialSigns | <strong>Min SpecialSigns:</strong> @Model.MinSpecialSigns <br>
-<strong>Min Digits checkbox:</strong> @Model.chDigits | <strong>Min Digits:</strong> @Model.MinDigits <br>
+    <strong>Regex:</strong> @Model.Reg
+    </div> -->
+    <center>
+        <h2>Register form:</h2>
+    </center>
+    <div>
 
-<strong>Regex:</strong> @Model.Reg
-</div> -->
-<center>
-<h2>Register form:</h2>
-</center>
-<div>
+        <form asp-action="Middle" asp-controller="Home" method="POST" class="form-wrapper">
+            <div class="input-group">
+                <label>Login:</label>
+                <input id="Login" asp-for="Login" type="text" class="input" size="35">
+            </div>
+            <div class="input-group">
+                <label>Password:</label>
+                <input id="Password" asp-for="Password" type="Password" class="input" size="35">
+            </div>
+            <div class="input-group">
+                <label>Your Regex Description:</label>
+                <input id="Description" asp-for="Description" type="text" class="input" size="35" value=@Model.Description>
+            </div>
+            <div class="input-group">
+                <label>Your Regex:</label>
+                <input id="Reg" asp-for="Reg" type="text" class="input" size="35" value=@Model.Reg>
+            </div>
+            <div class="input-group">
 
-<form asp-action="Middle" asp-controller="Home" method="POST" class="form-wrapper">
-    <div class="input-group">
-        <label>Login:</label>
-        <input id="Login" asp-for="Login" type="text" class="input" size="35">
-    </div>
-    <div class="input-group">
-        <label>Password:</label>
-        <input id="Password" asp-for="Password" type="Password" class="input" size="35">
-    </div>
-    <div class="input-group">
-        <label>Your Regex:</label>
-        <input id="Description" asp-for="Description" type="text" class="input" size="35" value=@Model.Description>
-    </div>
-    <div class="input-group">
-        <label>Your Regex:</label>
-        <input id="Reg" asp-for="Reg" type="text" class="input" size="35" value=@Model.Reg>
-    </div>
-    <div class="input-group">
-        <button class="submit" >Create</button>
-    </div>
-</form>
+                <a asp-controller="Home" asp-action="CreateRegex">
+                    <button type="button" class="btn btn-danger">Back</button>
+                </a>
+                    <button class="btn btn-success">Create</button>
+            </div>
+        </form>
 
-</div>
+    </div>
 
-<h3>@ViewData["Message"]</h3>
-</h3>
+
+

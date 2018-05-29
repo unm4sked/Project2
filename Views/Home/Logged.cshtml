@@ -1,6 +1,19 @@
 @model Project2.Models.UserModel
+<div class="text-center">
+    <h1>Hello, @Model.Login ! You are logged now!</h1>
 
-<h1>Hello, @Model.Login ! You are logged now!</h1>
+</div>
 
-
-
+<br />
+<br />
+<div class="text-center">
+    <button type="button" class="btn btn-primary">Generate xml</button>
+</div>
+<br />
+<br />
+<h2>
+    <strong>Login: </strong>@ViewData["Message1"] <br />
+    <strong>Password: </strong>@ViewData["Message2"] <br />
+    <strong>Regex: </strong>@ViewData["Message3"] <br />
+    <strong>Description: </strong> @ViewData["Message4"]
+</h2>

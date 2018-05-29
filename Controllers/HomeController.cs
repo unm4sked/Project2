@@ -23,16 +23,31 @@ namespace Project2.Controllers
         {
             if(String.IsNullOrWhiteSpace(u.Login) || String.IsNullOrWhiteSpace(u.Password))
             {
-                ViewData["Message"]= "Uzupelnij pole login i haslo";
+                ViewData["Message"]= "Enter Login and Password";
                 return View("Login");
             }
-            if(u.Login!="admin" && u.Password!="admin")
+           
+            if(Db.LoginToService(u.Login,u.Password) !=0)
             {
-                ViewData["Message"]= "Niepoprawne Login lub haslo";
+                UserModel u2 = new UserModel();
+                var list = new List<KeyValuePair<string, string>>();
+
+                u2 = Db.ViewQuerry(u.Login);
+
+                //ViewData["Message"] = list[0].Key+ list[0].Value + list[1].Value + list[2].Value + list[3].Value;
+                ViewData["Message1"] = u2.Login;
+                ViewData["Message2"] = u2.Password;
+                ViewData["Message3"] = u2.Reg;
+                ViewData["Message4"] = u2.Description;
+
+                return View(u);
+            }
+            else
+            {
+                ViewData["Message"] = "Incorrect Login or Password";
                 return View("Login");
             }
-            // sprawdzanie hasla i loginu z bazą danych i logowanie do logged jak wszystko ok
-            return View(u);
+           
         }
 
         public IActionResult About()
@@ -53,7 +68,19 @@ namespace Project2.Controllers
             //login czy jest taki sam w bazie danych
             string pass = u.Password;
             string login = u.Login;
-            
+            if (login == null || pass == null)
+            {
+                ViewData["Register"] = "no";
+                ViewData["Message"] = "Login & Password cannot be empty";
+                return View("Regist",u);
+            }
+
+            if(u.Reg == null || u.Description == null)
+            {
+                ViewData["Register"] = "no";
+                ViewData["Message"] = "Regex & Description cannot be empty";
+                return View("Regist", u);
+            }
             
             bool passValid = RegexModel.MatchPasswordWithRegex(u.Password,u.Reg);
 
@@ -61,13 +88,30 @@ namespace Project2.Controllers
             {
 
                 ViewData["Register"]="ok";
-                ViewData["Message"]=login+" "+pass+" "+" "+u.Reg+" "+passValid;
-                return View("Index");
+               
+                if(Db.CheckLogin(u.Login) == 0)
+                {
+                    //do 
+                    
+                    var statusAddUser = Db.AddUser(u);
+                    //ViewData["Message"]=login+" "+pass+" "+" "+u.Reg+" "+passValid + Hash.Hashing(pass);
+
+                    ViewData["Message"] = "You are registered! Good Job " + login + "!";
+                    return View("Index");
+                }
+                else
+                {
+                    ViewData["Message"] = "The login is taken by someone else";
+                    return View("Regist", u);
+                }
+               
+                
+                
             }
             else
             {
                 ViewData["Register"]="no";
-                ViewData["Message"]="Somethink wrong!";
+                ViewData["Message"]="Somethink wrong! Bad password, remember about your Regex.";
                 return View("CreateRegex");
             }
             

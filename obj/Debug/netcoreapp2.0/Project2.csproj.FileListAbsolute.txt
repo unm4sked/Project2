@@ -9,3 +9,14 @@
 /home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.AssemblyInfo.cs
 /home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.dll
 /home/ukasz/dotnet/Project2/obj/Debug/netcoreapp2.0/Project2.pdb
+C:\Users\Lukasz\Desktop\Project2\bin\Debug\netcoreapp2.0\Project2.deps.json
+C:\Users\Lukasz\Desktop\Project2\bin\Debug\netcoreapp2.0\Project2.runtimeconfig.json
+C:\Users\Lukasz\Desktop\Project2\bin\Debug\netcoreapp2.0\Project2.runtimeconfig.dev.json
+C:\Users\Lukasz\Desktop\Project2\bin\Debug\netcoreapp2.0\Project2.dll
+C:\Users\Lukasz\Desktop\Project2\bin\Debug\netcoreapp2.0\Project2.pdb
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.csprojResolveAssemblyReference.cache
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.csproj.CoreCompileInputs.cache
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.AssemblyInfoInputs.cache
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.AssemblyInfo.cs
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.dll
+C:\Users\Lukasz\Desktop\Project2\obj\Debug\netcoreapp2.0\Project2.pdb
