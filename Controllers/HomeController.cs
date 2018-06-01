@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -30,17 +31,24 @@ namespace Project2.Controllers
             if(Db.LoginToService(u.Login,u.Password) !=0)
             {
                 UserModel u2 = new UserModel();
-                var list = new List<KeyValuePair<string, string>>();
+                var list = new List<String>();
+                list = Db.ViewQuerry(u.Login);
+                //u2 = Db.ViewQuerry(u.Login);
+                u2.Login = list[0];
+                u2.Password = list[1];
+                u2.Reg = list[2];
+                u2.Description = list[3];
+                u2.MinLength = Int32.Parse(list[4]);
+                u2.MaxLength = Int32.Parse(list[5]);
+                u2.MinLowercase = Int32.Parse(list[6]);
+                u2.MinSpecialSigns = Int32.Parse(list[7]);
+                u2.MinUppercase = Int32.Parse(list[8]);
+                u2.MinDigits = Int32.Parse(list[9]);
 
-                u2 = Db.ViewQuerry(u.Login);
 
-                //ViewData["Message"] = list[0].Key+ list[0].Value + list[1].Value + list[2].Value + list[3].Value;
-                ViewData["Message1"] = u2.Login;
-                ViewData["Message2"] = u2.Password;
-                ViewData["Message3"] = u2.Reg;
-                ViewData["Message4"] = u2.Description;
 
-                return View(u);
+
+                return View(u2);
             }
             else
             {
@@ -48,6 +56,31 @@ namespace Project2.Controllers
                 return View("Login");
             }
            
+        }
+
+        public IActionResult GenerateXml(UserModel u)
+        {
+            if (String.IsNullOrEmpty(u.Login))
+            {
+                return RedirectToAction("Index");
+            }
+            Xml xml = new Xml();
+            try
+            {
+                xml.GenerateXml(u);
+            }
+            catch(Exception ex)
+            {
+                ViewData["ok"] = "no";
+                ViewData["Message"] = ex.Message;
+                return View(u);
+            }
+            ViewData["ok"] = "ok";
+            ViewData["Message"] = "XML generated correctly";
+
+            
+
+            return View(u);
         }
 
         public IActionResult About()
@@ -74,8 +107,14 @@ namespace Project2.Controllers
                 ViewData["Message"] = "Login & Password cannot be empty";
                 return View("Regist",u);
             }
+            if (login.Length > 200 || pass.Length > 200 || u.Description.Length > 200)
+            {
+                ViewData["Register"] = "no";
+                ViewData["Message"] = "Error";
+                return View("Regist", u);
+            }
 
-            if(u.Reg == null || u.Description == null)
+            if (u.Reg == null || u.Description == null)
             {
                 ViewData["Register"] = "no";
                 ViewData["Message"] = "Regex & Description cannot be empty";
@@ -126,6 +165,11 @@ namespace Project2.Controllers
             if(u.Description.Length>=200)
             {
                 ViewData["Message"]="Description must be less than 200";
+                return View("CreateRegex");
+            }
+            if(u.MinLength > u.MaxLength || u.MaxLength < u.MinDigits || u.MaxLength < u.MinLowercase || u.MaxLength < u.MinSpecialSigns || u.MaxLength < u.MinUppercase)
+            {
+                ViewData["Message"] = "Error";
                 return View("CreateRegex");
             }
             string reg = RegexModel.CreateReg(u.Description,u.MinLength,

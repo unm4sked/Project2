@@ -14,7 +14,8 @@ namespace Project2.Models
         {
             try
             {
-                string connectionString = "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
+                //string connectionString = "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
+                string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
                 SqlConnection connection = new SqlConnection(connectionString);
                 connection.Open();
                 //SqlCommand cmd = new SqlCommand("CREATE TABLE TestP2 ( ID int NOT NULL IDENTITY (1,1) PRIMARY KEY,Login varchar(255) NOT NULL,Password varchar(255) NOT NULL,Reg varchar(255) NOT NULL,Description varchar(255),MinLength int,MaxLength int,MinUppercase int,MinLowercase int,MinSpecialSigns int,MinDigits int); ", connection);
@@ -49,7 +50,7 @@ namespace Project2.Models
         }
         public static int CheckLogin(string Login)
         {
-            string connectionString = "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string querry = "SELECT * FROM TestP2 WHERE Login=@Loginn";
@@ -67,7 +68,7 @@ namespace Project2.Models
         {
             string Pass = Hash.Hashing(pass);
    
-            string connectionString = "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string querry = "SELECT * FROM TestP2 WHERE Login=@Loginn AND Password=@Passwordd";
@@ -82,11 +83,11 @@ namespace Project2.Models
 
         }
 
-        public static UserModel ViewQuerry(string Login)
+        public static List<String> ViewQuerry(string Login)
         {
-            //var list = new List<KeyValuePair<string, string>>();
+            var list = new List<String>();
             UserModel u = new UserModel();
-            string connectionString = "Server=localhost\\SQLEXPRESS01;Database=master;Trusted_Connection=True;";
+            string connectionString = "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=master;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             List<String> column = new List<String>{ "ID","Login","Password", "Reg", "Description", "MinLength","MaxLength", "MinUppercase","MinLowercase" ,"MinSpecialSigns", "MinDigits" };
@@ -106,22 +107,55 @@ namespace Project2.Models
             SqlCommand cmd1 = new SqlCommand(querryLogin, connection);
             cmd1.Parameters.AddWithValue("@Loginn", Login);
             u.Login = cmd1.ExecuteScalar().ToString();
+            list.Add(cmd1.ExecuteScalar().ToString());
 
             SqlCommand cmd2 = new SqlCommand(querryPass, connection);
             cmd2.Parameters.AddWithValue("@Loginn", Login);
             u.Password = cmd2.ExecuteScalar().ToString();
+            list.Add(cmd2.ExecuteScalar().ToString());
 
             SqlCommand cmd3 = new SqlCommand(querryReg, connection);
             cmd3.Parameters.AddWithValue("@Loginn", Login);
             u.Reg = cmd3.ExecuteScalar().ToString();
+            list.Add(cmd3.ExecuteScalar().ToString());
 
             SqlCommand cmd4 = new SqlCommand(querryDesc, connection);
             cmd4.Parameters.AddWithValue("@Loginn", Login);
             u.Description = cmd4.ExecuteScalar().ToString();
+            list.Add(cmd4.ExecuteScalar().ToString());
 
+            SqlCommand cmd5 = new SqlCommand(querryMinLen, connection);
+            cmd5.Parameters.AddWithValue("@Loginn", Login);
+            u.MinLength = Int32.Parse(cmd5.ExecuteScalar().ToString());
+            list.Add(cmd5.ExecuteScalar().ToString());
+
+            SqlCommand cmd6 = new SqlCommand(querryMaxLen, connection);
+            cmd6.Parameters.AddWithValue("@Loginn", Login);
+            u.MaxLength = Int32.Parse(cmd6.ExecuteScalar().ToString());
+            list.Add(cmd6.ExecuteScalar().ToString());
+
+            SqlCommand cmd7 = new SqlCommand(querryMinUp, connection);
+            cmd7.Parameters.AddWithValue("@Loginn", Login);
+            u.MaxLength = Int32.Parse(cmd7.ExecuteScalar().ToString());
+            list.Add(cmd7.ExecuteScalar().ToString());
+
+            SqlCommand cmd8 = new SqlCommand(querryMinLow, connection);
+            cmd8.Parameters.AddWithValue("@Loginn", Login);
+            u.MaxLength = Int32.Parse(cmd8.ExecuteScalar().ToString());
+            list.Add(cmd8.ExecuteScalar().ToString());
+
+            SqlCommand cmd9 = new SqlCommand(querryMinSpecial, connection);
+            cmd9.Parameters.AddWithValue("@Loginn", Login);
+            u.MaxLength = Int32.Parse(cmd9.ExecuteScalar().ToString());
+            list.Add(cmd9.ExecuteScalar().ToString());
+
+            SqlCommand cmd10 = new SqlCommand(querryMinDigi, connection);
+            cmd10.Parameters.AddWithValue("@Loginn", Login);
+            u.MaxLength = Int32.Parse(cmd10.ExecuteScalar().ToString());
+            list.Add(cmd10.ExecuteScalar().ToString());
 
             connection.Close();
-            return u;
+            return list;
         }
         
     }

@@ -8,21 +8,14 @@
             @ViewData["Message"]
         </div>
     }
-    <!-- <strong>Description:</strong> @Model.Description <br>
-    <strong>Min legth checkbox:</strong> @Model.chMinLength  |    <strong>Minlegth:</strong> @Model.MinLength <br>
-    <strong>Max legth checkbox:</strong> @Model.chMaxLength | <strong>MaxLength:</strong> @Model.MaxLength <br>
-    <strong>Min Uppercase checkbox:</strong> @Model.chUppercase | <strong>Min Uppercase:</strong> @Model.MinUppercase <br>
-    <strong>Min Lowercase checkbox:</strong> @Model.chLowercase | <strong>Min Lowercase:</strong> @Model.MinLowercase <br>
-    <strong>Min SpecialSigns checkbox:</strong> @Model.chSpecialSigns | <strong>Min SpecialSigns:</strong> @Model.MinSpecialSigns <br>
-    <strong>Min Digits checkbox:</strong> @Model.chDigits | <strong>Min Digits:</strong> @Model.MinDigits <br>
 
-    <strong>Regex:</strong> @Model.Reg
-    </div> -->
+
+    
     <center>
         <h2>Register form:</h2>
     </center>
     <div>
-
+        
         <form asp-action="Middle" asp-controller="Home" method="POST" class="form-wrapper">
             <div class="input-group">
                 <label>Login:</label>
@@ -37,16 +30,25 @@
                 <input id="Description" asp-for="Description" type="text" class="input" size="35" value=@Model.Description>
             </div>
             <div class="input-group">
-                <label>Your Regex:</label>
-                <input id="Reg" asp-for="Reg" type="text" class="input" size="35" value=@Model.Reg>
+                
+                <input id="Reg" asp-for="Reg" type="text" class="input" size="35" value=@Model.Reg hidden>
+                <input id="Reg" asp-for="MinDigits" type="text" class="input" size="35" value=@Model.MinDigits hidden>
+                <input id="Reg" asp-for="MaxLength" type="text" class="input" size="35" value=@Model.MaxLength hidden>
+                <input id="Reg" asp-for="MinLength" type="text" class="input" size="35" value=@Model.MinLength hidden>
+                <input id="Reg" asp-for="MinUppercase" type="text" class="input" size="35" value=@Model.MinUppercase hidden>
+                <input id="Reg" asp-for="MinLowercase" type="text" class="input" size="35" value=@Model.MinLowercase hidden>
+                <input id="Reg" asp-for="MinSpecialSigns" type="text" class="input" size="35" value=@Model.MinSpecialSigns hidden>
+
+
             </div>
             <div class="input-group">
 
                 <a asp-controller="Home" asp-action="CreateRegex">
                     <button type="button" class="btn btn-danger">Back</button>
                 </a>
-                    <button class="btn btn-success">Create</button>
+                <button class="btn btn-success">Create</button>
             </div>
+
         </form>
 
     </div>

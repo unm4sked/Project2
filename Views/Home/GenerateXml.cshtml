@@ -1,0 +1,50 @@
+﻿@model Project2.Models.UserModel
+
+@if (@ViewData["ok"] == "no")
+{
+    <div class="alert alert-danger space text-center">
+        @ViewData["Message"]
+    </div>
+}
+
+@if (@ViewData["ok"] == "ok")
+{
+    <div class="alert alert-success space text-center">
+        @ViewData["Message"]
+    </div>
+}
+<div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+       <pre lang="xml">
+            @{
+                string fileName = "tet.xml";
+
+                if (System.IO.File.Exists("tet.xml"))
+                {
+                    using (System.IO.StreamReader sr = new System.IO.StreamReader(fileName))
+
+                    {
+
+                        String line;
+
+                        while ((line = sr.ReadLine()) != null)
+
+                        {
+
+                            @line <br />
+
+                        }
+
+                    }
+                } 
+            }
+</pre>
+</div>
+@{
+    if (System.IO.File.Exists("tet.xml"))
+    {
+
+        System.IO.File.Delete("tet.xml");
+    }
+}
+
+
