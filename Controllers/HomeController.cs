@@ -27,13 +27,20 @@ namespace Project2.Controllers
                 ViewData["Message"]= "Enter Login and Password";
                 return View("Login");
             }
-           
-            if(Db.LoginToService(u.Login,u.Password) !=0)
+
+            Db db = new Db();
+            db.OpenConnection();
+
+            int db_loginToService = db.LoginToService(u.Login, u.Password);
+
+            if (db_loginToService != 0)
             {
                 UserModel u2 = new UserModel();
                 var list = new List<String>();
-                list = Db.ViewQuerry(u.Login);
-                //u2 = Db.ViewQuerry(u.Login);
+                list = db.ViewQuerry(u.Login);
+
+                db.CloseConnection();
+
                 u2.Login = list[0];
                 u2.Password = list[1];
                 u2.Reg = list[2];
@@ -44,9 +51,6 @@ namespace Project2.Controllers
                 u2.MinSpecialSigns = Int32.Parse(list[7]);
                 u2.MinUppercase = Int32.Parse(list[8]);
                 u2.MinDigits = Int32.Parse(list[9]);
-
-
-
 
                 return View(u2);
             }
@@ -127,20 +131,22 @@ namespace Project2.Controllers
             {
 
                 ViewData["Register"]="ok";
-               
-                if(Db.CheckLogin(u.Login) == 0)
+                Db db = new Db();
+                db.OpenConnection();
+                if (db.CheckLogin(u.Login) == 0)
                 {
                     //do 
                     
-                    var statusAddUser = Db.AddUser(u);
+                    var statusAddUser = db.AddUser(u);
                     //ViewData["Message"]=login+" "+pass+" "+" "+u.Reg+" "+passValid + Hash.Hashing(pass);
-
+                    db.CloseConnection();
                     ViewData["Message"] = "You are registered! Good Job " + login + "!";
                     return View("Index");
                 }
                 else
                 {
                     ViewData["Message"] = "The login is taken by someone else";
+                    db.CloseConnection();
                     return View("Regist", u);
                 }
                
